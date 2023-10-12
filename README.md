@@ -18,7 +18,7 @@ After returing all the data in JSON format, the service also offers the links of
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+[  git clone https://link-to-project]https://github.com/bicaandrei/Web-Scraper.git)
 ```
 
 Go to the project directory
