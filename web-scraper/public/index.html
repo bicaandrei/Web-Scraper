@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+        margin: 0;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        background-color: #ffffff;
+    }
+
+    #title{
+
+        font-family:'Times New Roman', Times, serif;
+        font-size: 50px;
+
+    }
+
+    #container {
+        width: 70rem;
+        padding: 2rem;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+    }
+
+    #searchWrapper{
+        margin-top: 3rem;
+        width: 50%;
+    }
+
+    #scroll-bg{
+
+        background: rgb(255, 255, 255);
+        width: 500px;
+        margin: 2;
+        padding: 20px;
+        border-radius: 30px;
+        border-color: black;
+
+    }
+
+    #scroll-div{
+
+        width: 500px;
+        background: rgb(255, 255, 255);
+        height: 400px;
+        overflow-y: scroll;
+
+    }
+
+    #scroll-object{
+
+        color: rgb(0, 0, 0);
+        font-family:'Times New Roman', Times, serif;
+        font-size: 15px;
+        padding: 20px;
+
+    }
+
+</style>
+</head>
+<title>WSA Scraper</title>
+<body>
+    <h1 id="title">
+
+        Web Scraper
+
+    </h1>
+    <div id="container">
+        <div id="searchWrapper">
+            <form>   
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </div>
+                    <input id='input_text' autocomplete="off" type="text" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter URL" required>
+                    <button id='get' type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Scrape</button>
+                </div>
+            </form>
+
+    <div id="scroll-bg">
+       <div id="scroll-div">
+      
+        <div id="scroll-object">The data will appear after you enter the URL and press the Scrape button! After the JSON file is loaded, scroll to the bottom to receive five surprises! </div>
+
+       </div>
+    </div>
+
+    <script>
+
+        const getBtn = document.getElementById('get')
+        const input = document.getElementById('input_text')
+        const baseUrl = 'http://localhost:3000/scrape?url='
+        const output = document.getElementById('scroll-object')
+
+        getBtn.addEventListener('click', getInfo)
+        
+        async function getInfo(e){
+
+              e.preventDefault()
+
+              let stringInput = input.value
+              if (stringInput == "https://wsa-test.vercel.app/"){
+
+                const res = await fetch(baseUrl + input.value,{
+ 
+                   method: 'GET'
+
+                })
+
+                const data = await res.json()
+                const jsonData = JSON.stringify(data["data"])
+                const imgLinks = []           
+                for(let i=0;i<data["data"].length;i++){
+ 
+                    imgLinks.push(data["data"][i]["image"])
+
+
+                }
+
+                const dataOutput = ""
+                output.innerHTML = dataOutput
+                for(let i=0;i<jsonData.length;i++){
+
+                   output.innerHTML += jsonData[i]
+                   if(jsonData[i]==',' && jsonData[i-1]=='"' && jsonData[i+1]=='"'){
+
+                     output.innerHTML += "<br></br>"
+
+                    }
+
+                    if(jsonData[i]==',' && jsonData[i-1]=='}' && jsonData[i+1]=='{'){
+
+                     output.innerHTML += "<br></br>"
+
+                    }
+                }
+
+              output.innerHTML += "<br></br>"
+              
+              for(var i=0;i<imgLinks.length;i++){
+
+                  output.innerHTML += '<a href="' + imgLinks[i] + '">Click me for a surprise!</a>';
+                  output.innerHTML += '<br></br>'
+
+
+              }
+            }
+            else{
+
+
+               alert("PLEASE PROVIDE THE CORRECT URL!!!!!!")
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
