@@ -1,0 +1,21 @@
+{
+  "name": "web-scraper",
+  "version": "1.0.0",
+  "description": "A Node.js REST Api Web Scraping service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js",
+    "REST",
+    "Api",
+    "web",
+    "scraper"
+  ],
+  "author": "Bica Andrei-Ionut",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
