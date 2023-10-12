@@ -10,7 +10,7 @@ https://wsa-test.vercel.app/
 ## Documentation
 
 Created an API that queries an URL and scrapes all the data from the content that it receives as a response. The service uses an endpoint that requests the query of our URL and if the request succedes(the HTTP 200 OK success status response is sent back)
-, it will scrape all the data it can get from the content and will return it in JSON format. To make it work, first you have to navigate to the root directory and start the server by running the command "node index.js", then you will navigate to http://localhost:3000/, paste the WSA site URL in the input field and press the Scrape button. The service scrapes for titles, links, images and text. It also analizes text and categorizes it based on the sentiment it gives off.
+, it will scrape all the data it can get from the content and will return it in JSON format. To make it work, first you have to navigate to the root directory and start the server by running the command "node index.js", then you will navigate to http://localhost:3000/, paste the WSA site URL in the input field and press the Scrape button(it will take about 2-3 seconds for the data to load). The service scrapes for titles, links, images and text. It also analizes text and categorizes it based on the sentiment it gives off.
 After returing all the data in JSON format, the service also offers the links of all the images for further use by the user(downloading, analyzing, etc..).
 
 ## Run Locally
